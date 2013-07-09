@@ -1,8 +1,11 @@
 var express = require('express');
 var fs = require('fs');
-var msg = fs.readFile('./index.html', function (err, data) {
+var msg = function() {
+      fs.readFile('./index.html', function (err, data) {
     if (err) throw err;
-});
+    return data;
+   });
+};
 
 
 
@@ -10,7 +13,7 @@ var msg = fs.readFile('./index.html', function (err, data) {
 var app = express.createServer(express.logger());
 
 app.get('/', function(request, response) {
-  response.send(msg);
+  response.send(msg());
 
 });
 
