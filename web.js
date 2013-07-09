@@ -1,19 +1,13 @@
 var express = require('express');
 var fs = require('fs');
-var msg = function() {
-      fs.readFile('./index.html', function (err, data) {
-    if (err) throw err;
-    return data;
-   });
-};
 
-
+var mensaje = fs.readFileSync('./index.html', "utf8");
 
 
 var app = express.createServer(express.logger());
 
 app.get('/', function(request, response) {
-  response.send(msg());
+  response.send(mensaje);
 
 });
 
